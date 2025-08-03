@@ -8,7 +8,7 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
     description: 'User password (minimum 8 characters)',
     example: 'newpassword123',
     required: false,
-    minLength: 8
+    minLength: 8,
   })
   @IsString()
   @IsOptional()

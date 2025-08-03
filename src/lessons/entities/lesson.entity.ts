@@ -1,4 +1,13 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, OneToMany, JoinColumn } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
+  ManyToOne,
+  OneToMany,
+  JoinColumn,
+} from 'typeorm';
 import { Class } from '../../classes/entities/class.entity';
 import { Session } from '../../sessions/entities/session.entity';
 import { LessonMater } from '../../lesson-maters/entities/lesson-mater.entity';
@@ -47,6 +56,9 @@ export class Lesson {
   @OneToMany(() => LessonMater, (lessonMater) => lessonMater.lesson)
   lessonMaters: LessonMater[];
 
-  @OneToMany(() => LessonAccessRole, (lessonAccessRole) => lessonAccessRole.lesson)
+  @OneToMany(
+    () => LessonAccessRole,
+    (lessonAccessRole) => lessonAccessRole.lesson,
+  )
   lessonAccessRoles: LessonAccessRole[];
 }

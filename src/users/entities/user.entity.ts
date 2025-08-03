@@ -1,4 +1,14 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, OneToOne, OneToMany, JoinColumn } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
+  ManyToOne,
+  OneToOne,
+  OneToMany,
+  JoinColumn,
+} from 'typeorm';
 import { ApiProperty, ApiHideProperty } from '@nestjs/swagger';
 import { Exclude } from 'class-transformer';
 import { Role } from '../../roles/entities/role.entity';
@@ -10,21 +20,21 @@ import { ModuleScore } from '../../module-scores/entities/module-score.entity';
 export class User {
   @ApiProperty({
     description: 'Unique user ID',
-    example: '550e8400-e29b-41d4-a716-446655440000'
+    example: '550e8400-e29b-41d4-a716-446655440000',
   })
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @ApiProperty({
     description: 'User full name',
-    example: 'John Doe'
+    example: 'John Doe',
   })
   @Column()
   name: string;
 
   @ApiProperty({
     description: 'User email address (unique)',
-    example: 'user@example.com'
+    example: 'user@example.com',
   })
   @Column({ unique: true })
   email: string;
@@ -37,7 +47,7 @@ export class User {
   @ApiProperty({
     description: 'User role ID',
     example: '1',
-    required: false
+    required: false,
   })
   @Column({ nullable: true })
   roleId: string;
@@ -45,7 +55,7 @@ export class User {
   @ApiProperty({
     description: 'User avatar URL',
     example: 'https://example.com/avatar.jpg',
-    required: false
+    required: false,
   })
   @Column({ nullable: true })
   avatar: string;
@@ -53,7 +63,7 @@ export class User {
   @ApiProperty({
     description: 'Teacher detail ID (if user is a teacher)',
     example: '550e8400-e29b-41d4-a716-446655440000',
-    required: false
+    required: false,
   })
   @Column({ nullable: true })
   teacherDetailId: string;
@@ -61,7 +71,7 @@ export class User {
   @ApiProperty({
     description: 'Student detail ID (if user is a student)',
     example: '550e8400-e29b-41d4-a716-446655440000',
-    required: false
+    required: false,
   })
   @Column({ nullable: true })
   studentDetailId: string;
@@ -69,7 +79,7 @@ export class User {
   @ApiProperty({
     description: 'User configuration (JSON string)',
     example: '{"theme":"dark","notifications":true}',
-    required: false
+    required: false,
   })
   @Column({ nullable: true })
   config: string;
@@ -77,7 +87,7 @@ export class User {
   @ApiProperty({
     description: 'User status',
     example: 'active',
-    enum: ['active', 'inactive', 'suspended']
+    enum: ['active', 'inactive', 'suspended'],
   })
   @Column({ default: 'active' })
   status: string;
@@ -85,21 +95,21 @@ export class User {
   @ApiProperty({
     description: 'Deletion date (soft delete)',
     example: '2023-01-01T00:00:00Z',
-    required: false
+    required: false,
   })
   @Column({ nullable: true })
   deletedAt: Date;
 
   @ApiProperty({
     description: 'Creation date',
-    example: '2023-01-01T00:00:00Z'
+    example: '2023-01-01T00:00:00Z',
   })
   @CreateDateColumn()
   createdAt: Date;
 
   @ApiProperty({
     description: 'Last update date',
-    example: '2023-01-01T00:00:00Z'
+    example: '2023-01-01T00:00:00Z',
   })
   @UpdateDateColumn()
   updatedAt: Date;
@@ -107,7 +117,7 @@ export class User {
   // Relations
   @ApiProperty({
     description: 'User role',
-    type: () => Role
+    type: () => Role,
   })
   @ManyToOne(() => Role, (role) => role.users)
   @JoinColumn({ name: 'roleId' })
@@ -116,7 +126,7 @@ export class User {
   @ApiProperty({
     description: 'Teacher details',
     type: () => TeacherDetail,
-    required: false
+    required: false,
   })
   @OneToOne(() => TeacherDetail, (teacherDetail) => teacherDetail.user)
   teacherDetail: TeacherDetail;
@@ -124,14 +134,14 @@ export class User {
   @ApiProperty({
     description: 'Student details',
     type: () => StudentDetail,
-    required: false
+    required: false,
   })
   @OneToOne(() => StudentDetail, (studentDetail) => studentDetail.user)
   studentDetail: StudentDetail;
 
   @ApiProperty({
     description: 'User module scores',
-    type: () => [ModuleScore]
+    type: () => [ModuleScore],
   })
   @OneToMany(() => ModuleScore, (moduleScore) => moduleScore.user)
   moduleScores: ModuleScore[];

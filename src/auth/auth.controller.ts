@@ -10,31 +10,40 @@ export class AuthController {
 
   @Post('login')
   @HttpCode(HttpStatus.OK)
-  @ApiOperation({ summary: 'User login', description: 'Endpoint for user login and obtaining JWT token' })
+  @ApiOperation({
+    summary: 'User login',
+    description: 'Endpoint for user login and obtaining JWT token',
+  })
   @ApiBody({ type: LoginDto })
-  @ApiResponse({ 
-    status: 200, 
+  @ApiResponse({
+    status: 200,
     description: 'Login successful',
     schema: {
       type: 'object',
       properties: {
         accessToken: {
           type: 'string',
-          example: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...'
+          example: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...',
         },
         user: {
           type: 'object',
           properties: {
-            id: { type: 'string', example: '550e8400-e29b-41d4-a716-446655440000' },
+            id: {
+              type: 'string',
+              example: '550e8400-e29b-41d4-a716-446655440000',
+            },
             name: { type: 'string', example: 'John Doe' },
             email: { type: 'string', example: 'user@example.com' },
-            role: { type: 'string', example: 'student' }
-          }
-        }
-      }
-    }
+            role: { type: 'string', example: 'student' },
+          },
+        },
+      },
+    },
   })
-  @ApiResponse({ status: 401, description: 'Unauthorized - Invalid email or password' })
+  @ApiResponse({
+    status: 401,
+    description: 'Unauthorized - Invalid email or password',
+  })
   login(@Body() loginDto: LoginDto) {
     return this.authService.login(loginDto);
   }
