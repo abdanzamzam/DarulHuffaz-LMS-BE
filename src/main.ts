@@ -34,10 +34,12 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api/docs', app, document);
 
-  await app.listen(appConfig.port);
-  console.log(`Application is running on: ${await app.getUrl()}`);
-  console.log(
-    `Swagger documentation is available at: ${await app.getUrl()}/api/docs`,
-  );
+  await app.listen(appConfig.port, '0.0.0.0');
+  const serverUrl = `http://localhost:${appConfig.port}`;
+  console.log(`Application is running on: ${serverUrl}`);
+  console.log(`Swagger documentation is available at: ${serverUrl}/api/docs`);
 }
-bootstrap();
+bootstrap().catch((err) => {
+  console.error('Failed to start application:', err);
+  process.exit(1);
+});
