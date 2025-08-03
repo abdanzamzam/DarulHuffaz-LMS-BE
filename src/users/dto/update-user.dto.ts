@@ -5,7 +5,7 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class UpdateUserDto extends PartialType(CreateUserDto) {
   @ApiProperty({
-    description: 'Password pengguna (minimal 8 karakter)',
+    description: 'User password (minimum 8 characters)',
     example: 'newpassword123',
     required: false,
     minLength: 8

@@ -9,21 +9,21 @@ import { ModuleScore } from '../../module-scores/entities/module-score.entity';
 @Entity('users')
 export class User {
   @ApiProperty({
-    description: 'ID unik pengguna',
+    description: 'Unique user ID',
     example: '550e8400-e29b-41d4-a716-446655440000'
   })
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @ApiProperty({
-    description: 'Nama lengkap pengguna',
+    description: 'User full name',
     example: 'John Doe'
   })
   @Column()
   name: string;
 
   @ApiProperty({
-    description: 'Alamat email pengguna (unik)',
+    description: 'User email address (unique)',
     example: 'user@example.com'
   })
   @Column({ unique: true })
@@ -35,7 +35,7 @@ export class User {
   password: string;
 
   @ApiProperty({
-    description: 'ID peran pengguna',
+    description: 'User role ID',
     example: '1',
     required: false
   })
@@ -43,7 +43,7 @@ export class User {
   roleId: string;
 
   @ApiProperty({
-    description: 'URL avatar pengguna',
+    description: 'User avatar URL',
     example: 'https://example.com/avatar.jpg',
     required: false
   })
@@ -51,7 +51,7 @@ export class User {
   avatar: string;
 
   @ApiProperty({
-    description: 'ID detail guru (jika pengguna adalah guru)',
+    description: 'Teacher detail ID (if user is a teacher)',
     example: '550e8400-e29b-41d4-a716-446655440000',
     required: false
   })
@@ -59,7 +59,7 @@ export class User {
   teacherDetailId: string;
 
   @ApiProperty({
-    description: 'ID detail siswa (jika pengguna adalah siswa)',
+    description: 'Student detail ID (if user is a student)',
     example: '550e8400-e29b-41d4-a716-446655440000',
     required: false
   })
@@ -67,7 +67,7 @@ export class User {
   studentDetailId: string;
 
   @ApiProperty({
-    description: 'Konfigurasi pengguna (JSON string)',
+    description: 'User configuration (JSON string)',
     example: '{"theme":"dark","notifications":true}',
     required: false
   })
@@ -75,7 +75,7 @@ export class User {
   config: string;
 
   @ApiProperty({
-    description: 'Status pengguna',
+    description: 'User status',
     example: 'active',
     enum: ['active', 'inactive', 'suspended']
   })
@@ -83,7 +83,7 @@ export class User {
   status: string;
 
   @ApiProperty({
-    description: 'Tanggal penghapusan (soft delete)',
+    description: 'Deletion date (soft delete)',
     example: '2023-01-01T00:00:00Z',
     required: false
   })
@@ -91,14 +91,14 @@ export class User {
   deletedAt: Date;
 
   @ApiProperty({
-    description: 'Tanggal pembuatan',
+    description: 'Creation date',
     example: '2023-01-01T00:00:00Z'
   })
   @CreateDateColumn()
   createdAt: Date;
 
   @ApiProperty({
-    description: 'Tanggal pembaruan terakhir',
+    description: 'Last update date',
     example: '2023-01-01T00:00:00Z'
   })
   @UpdateDateColumn()
@@ -106,7 +106,7 @@ export class User {
 
   // Relations
   @ApiProperty({
-    description: 'Peran pengguna',
+    description: 'User role',
     type: () => Role
   })
   @ManyToOne(() => Role, (role) => role.users)
@@ -114,7 +114,7 @@ export class User {
   role: Role;
 
   @ApiProperty({
-    description: 'Detail guru',
+    description: 'Teacher details',
     type: () => TeacherDetail,
     required: false
   })
@@ -122,7 +122,7 @@ export class User {
   teacherDetail: TeacherDetail;
 
   @ApiProperty({
-    description: 'Detail siswa',
+    description: 'Student details',
     type: () => StudentDetail,
     required: false
   })
@@ -130,7 +130,7 @@ export class User {
   studentDetail: StudentDetail;
 
   @ApiProperty({
-    description: 'Skor modul pengguna',
+    description: 'User module scores',
     type: () => [ModuleScore]
   })
   @OneToMany(() => ModuleScore, (moduleScore) => moduleScore.user)

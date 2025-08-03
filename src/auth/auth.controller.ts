@@ -10,11 +10,11 @@ export class AuthController {
 
   @Post('login')
   @HttpCode(HttpStatus.OK)
-  @ApiOperation({ summary: 'Login pengguna', description: 'Endpoint untuk login pengguna dan mendapatkan token JWT' })
+  @ApiOperation({ summary: 'User login', description: 'Endpoint for user login and obtaining JWT token' })
   @ApiBody({ type: LoginDto })
   @ApiResponse({ 
     status: 200, 
-    description: 'Login berhasil',
+    description: 'Login successful',
     schema: {
       type: 'object',
       properties: {
@@ -34,7 +34,7 @@ export class AuthController {
       }
     }
   })
-  @ApiResponse({ status: 401, description: 'Unauthorized - Email atau password salah' })
+  @ApiResponse({ status: 401, description: 'Unauthorized - Invalid email or password' })
   login(@Body() loginDto: LoginDto) {
     return this.authService.login(loginDto);
   }

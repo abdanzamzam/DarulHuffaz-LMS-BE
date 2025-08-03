@@ -3,7 +3,7 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class LoginDto {
   @ApiProperty({
-    description: 'Email pengguna',
+    description: 'User email',
     example: 'user@example.com',
     required: true
   })
@@ -12,7 +12,7 @@ export class LoginDto {
   email: string;
 
   @ApiProperty({
-    description: 'Password pengguna (minimal 8 karakter)',
+    description: 'User password (minimum 8 characters)',
     example: 'password123',
     required: true,
     minLength: 8
