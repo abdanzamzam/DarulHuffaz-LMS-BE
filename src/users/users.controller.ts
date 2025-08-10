@@ -17,7 +17,16 @@ import {
   ApiBearerAuth,
 } from '@nestjs/swagger';
 import { UsersService } from './users.service';
-import { CreateUserDto, UpdateUserDto } from './dto';
+import { 
+  CreateUserDto, 
+  UpdateUserDto, 
+  UserResponseDto,
+  CreateUserResponseDto,
+  UpdateUserResponseDto,
+  DeleteUserResponseDto,
+  GetUserResponseDto,
+  GetUsersResponseDto
+} from './dto';
 import { User } from './entities/user.entity';
 
 @ApiTags('Users')
@@ -35,7 +44,7 @@ export class UsersController {
   @ApiResponse({
     status: 201,
     description: 'User created successfully',
-    type: User,
+    type: CreateUserResponseDto,
   })
   @ApiResponse({ status: 400, description: 'Bad Request - Invalid data' })
   @ApiResponse({
@@ -54,7 +63,7 @@ export class UsersController {
   @ApiResponse({
     status: 200,
     description: 'User list retrieved successfully',
-    type: [User],
+    type: GetUsersResponseDto,
   })
   findAll(): Promise<User[]> {
     return this.usersService.findAll();
@@ -73,7 +82,7 @@ export class UsersController {
   @ApiResponse({
     status: 200,
     description: 'User details retrieved successfully',
-    type: User,
+    type: GetUserResponseDto,
   })
   @ApiResponse({ status: 404, description: 'Not Found - User not found' })
   findOne(@Param('id') id: string): Promise<User> {
@@ -94,7 +103,7 @@ export class UsersController {
   @ApiResponse({
     status: 200,
     description: 'User updated successfully',
-    type: User,
+    type: UpdateUserResponseDto,
   })
   @ApiResponse({ status: 400, description: 'Bad Request - Invalid data' })
   @ApiResponse({ status: 404, description: 'Not Found - User not found' })
@@ -118,6 +127,7 @@ export class UsersController {
   @ApiResponse({
     status: 200,
     description: 'User deleted successfully',
+    type: DeleteUserResponseDto,
   })
   @ApiResponse({ status: 404, description: 'Not Found - User not found' })
   remove(@Param('id') id: string): Promise<void> {

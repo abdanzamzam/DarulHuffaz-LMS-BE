@@ -1,7 +1,7 @@
 import { Controller, Post, Body, HttpCode, HttpStatus } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiBody } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
-import { LoginDto } from './dto';
+import { LoginDto, LoginResponseDto } from './dto';
 
 @ApiTags('Authentication')
 @Controller('auth')
@@ -18,27 +18,7 @@ export class AuthController {
   @ApiResponse({
     status: 200,
     description: 'Login successful',
-    schema: {
-      type: 'object',
-      properties: {
-        accessToken: {
-          type: 'string',
-          example: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...',
-        },
-        user: {
-          type: 'object',
-          properties: {
-            id: {
-              type: 'string',
-              example: '550e8400-e29b-41d4-a716-446655440000',
-            },
-            name: { type: 'string', example: 'John Doe' },
-            email: { type: 'string', example: 'user@example.com' },
-            role: { type: 'string', example: 'student' },
-          },
-        },
-      },
-    },
+    type: LoginResponseDto
   })
   @ApiResponse({
     status: 401,
